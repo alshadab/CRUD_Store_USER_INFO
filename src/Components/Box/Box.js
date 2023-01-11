@@ -11,6 +11,7 @@ import ListIcon from "@mui/icons-material/List";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 //import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { useNavigate } from "react-router-dom";
+
 import("./Box.css");
 
 const Box = () => {
@@ -23,9 +24,10 @@ const Box = () => {
   const [phone, setPhone] = useState();
   const [address, setAddress] = useState("");
 
+  const URL = process.env.REACT_APP_APP_URL;
   //get user data
   const getUser = () => {
-    fetch("http://localhost:5000/student/get")
+    fetch(`${URL}/student/get`)
       .then((res) => res.json())
       .then((data) => setData(data));
   };
@@ -35,7 +37,7 @@ const Box = () => {
 
   //delete user
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/student/delete/${id}`, {
+    fetch(`${URL}/student/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
@@ -58,7 +60,7 @@ const Box = () => {
       phone,
       address,
     };
-    let url = "http://localhost:5000/student/create";
+    let url = `${URL}/student/create`;
     fetch(url, {
       method: "POST",
       headers: { "Content-type": "application/json" },
