@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
 import axios from "axios";
 import "./Update.css";
+
 const Update = () => {
   const [name, setName] = useState("");
   const [email, setMail] = useState("");
@@ -11,11 +12,11 @@ const Update = () => {
   const [address, setAddress] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const URL = process.env.REACT_APP_APP_URL;
   //get data
   const viewData = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/student/get/${id}`);
+      const res = await axios.get(`${URL}/student/get/${id}`);
       setName(res.data.name);
       setMail(res.data.email);
       setPhone(res.data.phone);
@@ -39,10 +40,7 @@ const Update = () => {
     };
 
     try {
-      const res = await axios.patch(
-        `http://localhost:5000/student/update/${id}`,
-        formInfo
-      );
+      const res = await axios.patch(`${URL}/student/update/${id}`, formInfo);
       if (res.status === 200) {
         alert("Successfully Updated student");
         navigate("/");
