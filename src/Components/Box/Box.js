@@ -37,7 +37,7 @@ const Box = () => {
 
   //delete user
   const handleDelete = (id) => {
-    fetch(`${URL}/student/${id}`, {
+    fetch(`${URL}/student/delete/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
